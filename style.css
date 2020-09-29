@@ -44,6 +44,17 @@ input {
   overflow: visible;
 }
 
+input:focus {
+  outline: 0;
+}
+
+input.invalid {
+  border-color: #ff0000;
+}
+label.invalid, input.invalid::placeholder {
+  color: #ff0000;
+}
+
 input::placeholder {
   font-size: 14px;
 }
