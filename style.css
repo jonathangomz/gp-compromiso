@@ -11,6 +11,7 @@ main {
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
   height: 100vh;
+  padding: 24px 0;
 }
 
 h1 {
@@ -21,15 +22,13 @@ h1 {
 form {
   display: inherit;
   flex-direction: inherit;
-  gap: 6px;
-  margin: 64px 0;
+  gap: 12px;
   width: max-content;
 }
 
 fieldset {
   border: none;
-  display: flex;
-  width: 256px;
+  max-width: 256px;
   padding: 0;
   margin: 0;
 }
@@ -43,10 +42,15 @@ input {
   padding: 8px 12px;
   border-radius: 5px;
   border: 1px solid black;
+  overflow: visible;
+}
+
+input::placeholder {
+  font-size: 14px;
 }
 
 button {
-  background-color: white;
+  background-color: #ffffff;
   border: 2px solid #138496;
   border-radius: 5px;
   color: #138496;
@@ -61,5 +65,11 @@ button {
 
 button:hover, button:active {
   background-color: #138496;
-  color: white;
+  color: #ffffff;
+}
+
+@media(min-height: 512px) {
+  main {
+    padding: 0;
+  }
 }
