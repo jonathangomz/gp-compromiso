@@ -89,6 +89,6 @@ window.onload = function () {
     doc.text(`Distrito: ${district}`, 20, 95);
     doc.text(`Objetivo bautismal 2021: ${objective}`, 20, 105);
 
-    //doc.save('compromiso.pdf');
+    doc.save('compromiso.pdf');
   }
 }
