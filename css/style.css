@@ -1,0 +1,12 @@
+#watermark {
+  position: fixed;
+  bottom: 5px;
+  z-index: -1;
+  width: 100%;
+}
+
+#watermark img {
+  width: 50%;
+  opacity: 0.4;
+  min-width: 312px;
+}

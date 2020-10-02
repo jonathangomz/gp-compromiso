@@ -1,28 +1,4 @@
 window.onload = function () {
-
-
-
-
-
-  (function genPDF() {
-    html2canvas(document.body, {
-      onrendered: function (canvas) {
-
-        var img = canvas.toDataURL("image/png");
-        var doc = new jsPDF();
-        doc.addImage(img, 'JPEG', 20, 20);
-        doc.save('test.pdf');
-      }
-
-    });
-
-  })();
-
-
-
-
-
-
   const inputs = document.getElementsByTagName('input');
   for (const input of inputs) {
     input.onfocus = function (evt) {
@@ -110,17 +86,25 @@ window.onload = function () {
     district,
     objective
   }) {
-    const doc = new jsPDF();
 
-    doc.setFontSize(24);
-    doc.text("MI COMPROMISO CON CRISTO", 110, 35, 'center');
-    doc.setFontSize(16);
-    doc.text(`Nombre del lider: ${leader}`, 20, 65);
-    doc.text(`GP: ${gp}`, 20, 75);
-    doc.text(`Iglesia: ${church}`, 20, 85);
-    doc.text(`Distrito: ${district}`, 20, 95);
-    doc.text(`Objetivo bautismal 2021: ${objective}`, 20, 105);
-
-    doc.save('compromiso.pdf');
+    html2canvas(document.body, {
+      onrendered: function (canvas) {
+        var img = canvas.toDataURL();
+        var doc = new jsPDF();
+        doc.addImage(canvas, 'PNG', 20, 20);
+        
+        doc.setFontSize(24);
+        doc.text("MI COMPROMISO CON CRISTO", 110, 35, 'center');
+        doc.setFontSize(16);
+        doc.text(`Nombre del lider: ${leader}`, 20, 65);
+        doc.text(`GP: ${gp}`, 20, 75);
+        doc.text(`Iglesia: ${church}`, 20, 85);
+        doc.text(`Distrito: ${district}`, 20, 95);
+        doc.text(`Objetivo bautismal 2021: ${objective}`, 20, 105);
+        
+        doc.save('compromiso.pdf');
+      }
+    });
+    
   }
 }
