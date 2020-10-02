@@ -1,23 +1,26 @@
 window.onload = function () {
   const inputs = document.getElementsByTagName('input');
-  for(const input of inputs) {
-    input.onfocus = function(evt) {
+  for (const input of inputs) {
+    input.onfocus = function (evt) {
       removeClassInvalid(evt.target);
     }
 
-    input.onblur = function(evt) {
+    input.onblur = function (evt) {
       const value = evt.target.value;
-      if(!isValidValue(value))
+      if (!isValidValue(value))
         addClassInvalid(evt.target);
     }
   }
 
   const form = document.getElementById('generate-commitment');
-  form.onsubmit = function(evt) {
+  form.onsubmit = function (evt) {
     evt.preventDefault();
 
-    const { values, valid } = validateAndExtractData();
-    if(valid)
+    const {
+      values,
+      valid
+    } = validateAndExtractData();
+    if (valid)
       generatePDF(values);
     else
       alert('Hacen falta de rellenar los campos en rojo');
@@ -43,12 +46,11 @@ window.onload = function () {
       valid: true,
     }
 
-    for(const key in pdf_values.values) {
-      if(!isValidValue(pdf_values.values[key])) {
+    for (const key in pdf_values.values) {
+      if (!isValidValue(pdf_values.values[key])) {
         addClassInvalid(fields[key]);
         pdf_values.valid = false;
-      }
-      else
+      } else
         continue;
     }
 
@@ -57,10 +59,10 @@ window.onload = function () {
 
   function isValidValue(field) {
     let tmp_field = field;
-    if(!tmp_field) return false;
+    if (!tmp_field) return false;
 
     tmp_field = tmp_field.trim();
-    if(tmp_field === 0) return false;
+    if (tmp_field === 0) return false;
 
     return true;
   }
@@ -77,7 +79,13 @@ window.onload = function () {
     label.classList.remove('invalid');
   }
 
-  function generatePDF({ leader, gp, church, district, objective }) {
+  function generatePDF({
+    leader,
+    gp,
+    church,
+    district,
+    objective
+  }) {
     const doc = new jsPDF();
 
     doc.setFontSize(24);
