@@ -1,4 +1,28 @@
 window.onload = function () {
+
+
+
+
+
+  (function genPDF() {
+    html2canvas(document.body, {
+      onrendered: function (canvas) {
+
+        var img = canvas.toDataURL("image/png");
+        var doc = new jsPDF();
+        doc.addImage(img, 'JPEG', 20, 20);
+        doc.save('test.pdf');
+      }
+
+    });
+
+  })();
+
+
+
+
+
+
   const inputs = document.getElementsByTagName('input');
   for (const input of inputs) {
     input.onfocus = function (evt) {

@@ -5,13 +5,16 @@ body {
 }
 
 main {
+  padding: 24px 0;
+}
+
+section {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Montserrat', sans-serif;
   height: 100vh;
-  padding: 24px 0;
 }
 
 h1 {
