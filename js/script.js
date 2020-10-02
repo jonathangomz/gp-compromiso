@@ -91,7 +91,7 @@ window.onload = function () {
     var doc = new jsPDF();
 
     
-    doc.addImage(img, 'PNG', 20, 45, 300, 360, compression = 'FAST');
+    doc.addImage(img, 'PNG', 58, 100, 100, 120, compression = 'FAST');
     
     doc.setFont('times');
     doc.setFontSize(24);
