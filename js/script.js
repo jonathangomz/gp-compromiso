@@ -1,4 +1,9 @@
 window.onload = function () {
+  let modal = configureModal({
+    close: document.getElementsByClassName("button close")[0],
+    modal: document.getElementById('modal')
+  });
+  
   const inputs = document.getElementsByTagName('input');
   for (const input of inputs) {
     input.onfocus = function (evt) {
@@ -15,15 +20,50 @@ window.onload = function () {
   const form = document.getElementById('generate-commitment');
   form.onsubmit = function (evt) {
     evt.preventDefault();
+    
+    const button = document.getElementById('generate');
+    button.setAttribute('disabled', 'true');
+    button.setAttribute('class', 'disabled');
+    button.textContent = 'Generando...';
 
     const {
       values,
       valid
     } = validateAndExtractData();
-    if (valid)
+    if (valid) {
       generatePDF(values);
-    else
-      alert('Hacen falta de rellenar los campos en rojo');
+      
+      modal.display('El documento fue descargado o está listo para descargar');
+      button.removeAttribute('disabled');
+      button.removeAttribute('class');
+      button.textContent = 'Generar & descargar PDF';
+    }
+    else {
+      modal.display('Hacen falta de rellenar los campos en rojo');
+      button.removeAttribute('disabled');
+      button.removeAttribute('class');
+      button.textContent = 'Generar & descargar PDF';
+    }
+  }
+
+
+  function configureModal({close, modal}) {
+    // When the user clicks on <span> (x), close the modal
+    modal.close = close.onclick = function() {
+        modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    modal.display = function(message) {
+        modal.style.display = "block";
+        document.getElementById('modal-text').innerHTML = message ?? "This modal is empty hehe";
+    }
+
+    return modal;
   }
 
   function validateAndExtractData() {
@@ -122,6 +162,7 @@ window.onload = function () {
     const img = document.getElementById('logo');
     doc.addImage(img, 'PNG', 58, 110, 100, 120, compression = 'FAST');
     
+
     doc.save('compromiso.pdf');
   }
 }
