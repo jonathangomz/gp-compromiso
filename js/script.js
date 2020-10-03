@@ -163,6 +163,6 @@ window.onload = function () {
     doc.addImage(img, 'PNG', 58, 110, 100, 120, compression = 'FAST');
     
 
-    doc.save('compromiso.pdf');
+    window.open(doc.output('bloburl', 'compromiso.pdf'));
   }
 }
